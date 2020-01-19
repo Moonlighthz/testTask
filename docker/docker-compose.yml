@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  php:
+    container_name: ${COMPOSE_PROJECT_NAME}-php
+    restart: always
+    build: ./php
+    volumes:
+      - "${COMPOSE_PROJECT_RESOURCE}/src:${APP_SOURCE}"
+    environment:
+      - PHP_XDEBUG_IDEKEY=PSTORM
+      - PHP_XDEBUG_DEFAULT_ENABLE=0
+      - PHP_XDEBUG_REMOTE_ENABLE=1
+      - PHP_XDEBUG_REMOTE_AUTOSTART=0
+      - PHP_XDEBUG_REMOTE_CONNECT_BACK=0
+      - PHP_XDEBUG_PROFILER_ENABLE=0
+      - PHP_XDEBUG_REMOTE_HOST=host.docker.internal
+      - PHP_XDEBUG_REMOTE_PORT=9005
+      - PHP_XDEBUG_REMOTE_MODE=req
+      - APP_SOURCE=${APP_SOURCE}
+  beanstalkd:
+    container_name: ${COMPOSE_PROJECT_NAME}-beanstalkd
+    image: schickling/beanstalkd
