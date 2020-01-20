@@ -23,7 +23,5 @@ class TaxTest extends TestCase
         ];
 
         dispatch(new TaxJob($task));
-
-        $this->assertNotEmpty($task);
     }
 }

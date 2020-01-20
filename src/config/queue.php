@@ -6,7 +6,7 @@ return [
         'beanstalkd' => [
             'driver' => 'beanstalkd',
             'host' => 'test-task-beanstalkd',
-            'queue' => 'nalogka-notifications',
+            'queue' => env('QUEUE_NAME', 'nalogka-notifications'),
             'retry_after' => 90,
             'block_for' => 0,
         ],

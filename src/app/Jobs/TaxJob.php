@@ -2,6 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Contracts\TaxManagerContract;
+use App\Factories\TaxManagerFactory;
+use Exception;
 use Illuminate\Support\Facades\Log;
 
 class TaxJob extends Job
@@ -34,12 +37,17 @@ class TaxJob extends Job
      */
     public function handle()
     {
-        $manager = TaxManagerFactory::make($this->data['transport'] ?? null);
+        try {
+            $factory = new TaxManagerFactory($this->data);
+            $manager = $factory->make();
 
-        if (!$manager instanceof ) {
-            throw new \Exception(0);
+            if (!$manager instanceof TaxManagerContract) {
+                throw new Exception('Не верно задан класс-обработчик');
+            }
+
+            $manager->writeLog();
+        } catch (Exception $exception) {
+            Log::error($exception->getMessage());
         }
-
-        Log::info('Job completed', $this->data);
     }
 }
