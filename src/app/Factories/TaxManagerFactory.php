@@ -12,11 +12,19 @@ class TaxManagerFactory
      */
     protected $data;
 
+    /**
+     * TaxManagerFactory constructor.
+     * @param array $data
+     */
     public function __construct(array $data)
     {
         $this->data = $data;
     }
 
+    /**
+     * @return EmailManager
+     * @throws Exception
+     */
     public function make()
     {
         switch ($this->data['transport']) {

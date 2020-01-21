@@ -25,6 +25,7 @@ class TaxJob extends Job
     protected $data;
 
     /**
+     * TaxJob constructor.
      * @param array $data
      */
     public function __construct(array $data)
@@ -35,7 +36,7 @@ class TaxJob extends Job
     /**
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         try {
             $factory = new TaxManagerFactory($this->data);

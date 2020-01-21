@@ -17,7 +17,7 @@ interface TaxManagerContract
     public function writeLog(): void ;
 
     /**
-     * @return bool|mixed
+     * @return bool
      * @throws Exception
      */
     public function validate(): bool;
